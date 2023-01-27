@@ -1,0 +1,24 @@
+{
+    "thsarabunnew": {
+        "normal": "C:\\xampp\\htdocs\\saraban\\storage\\fonts\/thsarabunnew_normal_fa20402d6805efb432fe639d1ddd4671",
+        "bold": "C:\\xampp\\htdocs\\saraban\\storage\\fonts\/thsarabunnew_bold_c321351fa8a84687c909ec9fbff5968b",
+        "italic": "C:\\xampp\\htdocs\\saraban\\storage\\fonts\/thsarabunnew_italic_588dceeca75a4cde6ee532e2ddf4c972",
+        "bold_italic": "thsarabunnew_bold_italic_56af003739d7d5f38730fec3b971a63b"
+    },
+    "sarabun": {
+        "normal": "sarabun_normal_618c7e0367b8be883c9e4b7b2597563d"
+    },
+    "font awesome\\ 5 brands": {
+        "normal": "font_awesome__5_brands_normal_5ff9335c8124209f067b129ec661e7a7"
+    },
+    "font awesome\\ 5 free": {
+        "normal": "C:\\xampp\\htdocs\\saraban\\storage\\fonts\/font_awesome__5_free_normal_133466f27c8bee0322ecb799f0f656f5",
+        "900": "font_awesome__5_free_900_28f8ca60159544df574b54ac4c0d4814"
+    },
+    "kanit": {
+        "normal": "kanit_normal_609ddff93e4a03357f24e6a9f79d9e19"
+    },
+    "source sans pro": {
+        "italic": "source_sans_pro_italic_27672a92dcedb2218abd2dadee4fe950"
+    }
+}
