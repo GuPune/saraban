@@ -125,11 +125,11 @@
                             <div class="mb-3 row">
                                 <div class="col-sm-2 col-form-label">เรื่อง :</div>
                                     <div class="col-sm-9">
-                                    <select class="form-control" name="Esubject"  required>
+                                    <select class="form-control" name="Esubject" id="Esubject"  required>
                                     <option selected disabled>กรุณาเลือกเรื่อง</option>
-                                    @foreach($story as $rowstory)
+                                    {{-- @foreach($story as $rowstory)
                                     <option value="{{$rowstory->amstory_name}}">{{$rowstory->amstory_name}}</option>
-                                    @endforeach
+                                    @endforeach --}}
                                     </select>
                                     </div>
                                     <button type="button" class="btn btn-light" style ="border-radius: 100px; padding: .25rem 0.8rem" data-bs-toggle="modal" data-bs-target="#story"><i class="bi bi-plus-circle" style="font-size:20px;"></i></button>
@@ -139,11 +139,9 @@
                             <div class="mb-3 row">
                              <div class="col-sm-2 col-form-label">หนังสือจากหน่วยงาน :</div>
                                     <div class="col-sm-9">
-                                    <select class="form-control" name="Ebookeagency" required>
+                                    <select class="form-control" name="Ebookeagency" id="Ebookeagency" required>
                                     <option selected disabled>กรุณาเลือกหน่วยงาน</option>
-                                    @foreach($admitagency as $rowagency)
-                                    <option value="{{$rowagency->amagency_name}}">{{$rowagency->amagency_name}}</option>
-                                    @endforeach
+
                                     </select>
                                     </div>
                                     <button type="button" class="btn btn-light" style ="border-radius: 100px; padding: .25rem 0.8rem" data-bs-toggle="modal" data-bs-target="#by"><i class="bi bi-plus-circle" style="font-size:20px;"></i></button>
@@ -189,24 +187,24 @@
                                         <h4 class="modal-title fs-5" id="storyLabel">บันทึกข้อมูลเรื่อง</h4>
                                         <i class="bi bi-x-circle" type="button" data-bs-dismiss="modal" aria-label="Close" style='font-size:25px'></i>
                                     </div>
-                                    <form action="{{url('/admit/add/story')}}" id="add-story-form" method="post" enctype="multipart/form-data" >
-                                    @csrf 
+
+
                                     <div class="modal-body">
                                     <div class="mb-3 row">
                                     <div class="col-sm-2 col-form-label">เรื่อง </div>
                                         <div class="col-sm-10">
-                                     <input class="form-control" name="amstory_name" type="text" placeholder="กรุณากรอกเรื่อง" required>
+                                     <input class="form-control" name="amstory_name" id="amstory_name" type="text" placeholder="กรุณากรอกเรื่อง" required>
                                         </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                                        <button type="submit" class="btn btn-success">บันทึกข้อมูล</button>
+                                        <button type="button" class="btn btn-success btn-save">บันทึกข้อมูล</button>
                                     </div>
                                     </div>
                                 </div>
                             </div>
-                            </form>
+
                             <!-- /เพิ่มเรื่องในselectmodal -->
 
                             <!-- Modal เพิ่มหนังสือจากในselect-->
@@ -217,24 +215,24 @@
                                     <h4 class="modal-title fs-5" id="byLabel">บันทึกหนังสือจากหน่วยงาน</h4>
                                     <i class="bi bi-x-circle" type="button" data-bs-dismiss="modal" aria-label="Close" style='font-size:25px'></i>
                                 </div>
-                                <form action="{{url('/admit/add/by')}}" method="post" enctype="multipart/form-data">
-                                @csrf 
+
                                 <div class="modal-body">
                                 <div class="mb-3 row">
                                     <div class="col-sm-4 col-form-label">หนังสือจากหน่วยงาน</div>
                                         <div class="col-sm-8">
-                                     <input class="form-control" name="amagency_name" type="text" placeholder="กรุณากรอกหน่วยงาน" required>
+                                     <input class="form-control" name="amagency_name" id="amagency_name" type="text" placeholder="กรุณากรอกหน่วยงาน" required>
                                         </div>
-                                </div>  
+                                </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                                    <button type="submit" class="btn btn-success">บันทึกข้อมูล</button>
+                                    <button type="button" class="btn btn-success btn-save-amagency">บันทึกข้อมูล</button>
                                 </div>
                                 </div>
                             </div>
                             </div>
-                        </form><br>
+
+                        <br>
                             <!-- /เพิ่มเรื่องในselectmodal -->
 
 
@@ -271,6 +269,178 @@
        })
     });
     })
+
+
+    $(document).ready(function(){
+        $.ajax({
+                    dataType: 'json',
+                    type:'GET',
+                    url: '/admit/story',
+                    success: function(datas){
+
+
+                    //    data = JSON.parse(datas);
+                    // amstory_id
+                    // amstory_name
+// loop through our returned data and add an option to the select for each province returned
+$.each(datas, function(i, item) {
+  $('#Esubject').append($('<option>', {value:item.amstory_name, text:item.amstory_name}));
+});
+
+                   // $('select[name="Esubject"]').html(datas);
+                    }
+                })
+
+
+
+                $.ajax({
+                    dataType: 'json',
+                    type:'GET',
+                    url: '/admit/admitagency',
+                    success: function(data){
+
+
+                    //    data = JSON.parse(datas);
+                    // amstory_id
+                    // amstory_name
+// loop through our returned data and add an option to the select for each province returned
+
+$.each(data, function(x, itemx) {
+  $('#Ebookeagency').append($('<option>', {value:itemx.amagency_name, text:itemx.amagency_name}));
+});
+
+                   // $('select[name="Esubject"]').html(datas);
+                    }
+                })
+
+
+    });
+
+
+
+    $('body').on('click', '.btn-save-amagency', function () {
+
+        var amagency_name = $('#amagency_name').val();
+
+
+
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var token = '{{ csrf_token() }}';
+
+
+        $.ajax({
+                    dataType: 'json',
+                    type:'POST',
+                    data:{amagency_name:amagency_name,'_token': token},
+                    url: '/admit/admitagency/save',
+                    success: function(datas){
+                        var amagency_name = $('#amagency_name').val('');
+                        newselectEbookeagency();
+
+                    }
+                })
+
+
+                $('#by').modal('hide');
+    })
+    $('body').on('click', '.btn-save', function () {
+
+        var amstory_name = $('#amstory_name').val();
+
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            var token = '{{ csrf_token() }}';
+
+
+        $.ajax({
+                    dataType: 'json',
+                    type:'POST',
+                    data:{amstory_name:amstory_name,'_token': token},
+                    url: '/admit/story/save',
+                    success: function(datas){
+                        var amstory_name = $('#amstory_name').val('');
+                        newselect();
+
+                    }
+                })
+
+        $('#story').modal('hide');
+
+
+
+
+
+    });
+
+    function newselect(){
+
+        $("#Esubject").empty();
+
+        $.ajax({
+                    dataType: 'json',
+                    type:'GET',
+                    url: '/admit/story',
+                    success: function(datas){
+
+
+                    //    data = JSON.parse(datas);
+                    // amstory_id
+                    // amstory_name
+// loop through our returned data and add an option to the select for each province returned
+
+$('#Esubject').append($('<option selected disabled>กรุณาเลือกเรื่อง</option>'));
+$.each(datas, function(i, item) {
+  $('#Esubject').append($('<option>', {value:item.amstory_name, text:item.amstory_name}));
+});
+
+                   // $('select[name="Esubject"]').html(datas);
+                    }
+                })
+
+    }
+
+
+
+    function newselectEbookeagency(){
+
+$("#Ebookeagency").empty();
+
+$.ajax({
+            dataType: 'json',
+            type:'GET',
+            url: '/admit/admitagency',
+            success: function(datas){
+
+
+            //    data = JSON.parse(datas);
+            // amstory_id
+            // amstory_name
+// loop through our returned data and add an option to the select for each province returned
+
+$('#Ebookeagency').append($('<option selected disabled>กรุณาเลือกเรื่อง</option>'));
+$.each(datas, function(i, item) {
+$('#Ebookeagency').append($('<option>', {value:item.amagency_name, text:item.amagency_name}));
+});
+
+           // $('select[name="Esubject"]').html(datas);
+            }
+        })
+
+}
+
+
+
+
+
 </script>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -292,5 +462,5 @@ $(document).ready(function(){
     })
 });
 });
-</script> -->
+</script>
 @endsection

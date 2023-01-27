@@ -59,6 +59,12 @@ Route::post('/admit/getdepartment',[AdmitController::class,'getdepartment']); //
 Route::get('/addbook',[AdmitController::class,'addbook'])->name('addbook'); //หน้าaddbook
 Route::post('/addbook/add',[AdmitController::class,'store'])->name('addbookadd'); //เพิ่มข้อมูลaddbook
 Route::post('/admit/add/story',[AdmitController::class,'addstory']); //เพิ่มข้อมูลเรื่อง
+
+Route::get('/admit/story',[AdmitController::class,'story']); //ดึงข้อมูล story
+Route::post('/admit/story/save',[AdmitController::class,'savestory']); //ดึงข้อมูล story
+Route::get('/admit/admitagency',[AdmitController::class,'admitagency']); //ดึงข้อมูลadmitagency
+Route::post('/admit/admitagency/save',[AdmitController::class,'saveadmitagency']); //ดึงข้อมูล story
+
 Route::post('/admit/add/by',[AdmitController::class,'addagency']); //เพิ่มข้อมูลหน่วยงานจากที่
 Route::post('/admit/statuswait/{id}',[AdmitController::class,'statuswait'])->name('statuswait'); //รอตอบรับ
 Route::post('/admit/statusaccept/{id}',[AdmitController::class,'statusaccept'])->name('statusaccept'); //รอตอบรับ
@@ -100,7 +106,7 @@ Route::post('/transport/add/{id}',[TransportController::class,'transportadd'])->
 Route::post('/transport/update/{id}',[TransportController::class,'updatetransport'])->name('uodatetransport'); //แก้ไขmodal edit
 Route::get('/transport/edit/{id}',[TransportController::class,'edittransport'])->name('edittransport'); //แก้ไขmodal edit
 Route::post('/transport/edit/depositor',[TransportController::class,'adddepositor1'])->name('adddepositortransport');
-// Route::get('/search',[TransportController::class,'search'])->name('search'); 
+// Route::get('/search',[TransportController::class,'search'])->name('search');
 
 //แจ้งเตือน
 Route::get('/warn',[WarnController::class,'warn'])->name('warn');

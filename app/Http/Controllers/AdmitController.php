@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\admitstory;
 use Illuminate\Http\Request;
 use App\Models\branch;
-use Illuminate\support\Facades\DB; 
+use Illuminate\support\Facades\DB;
 use App\Models\agency;
 use App\Models\admitagency;
 use App\Models\Department;
@@ -42,7 +42,7 @@ public function admituser(Request $request)
             elseif($request->get('search')){
               $q ->where('Ebook_receipt','LIKE','%'.$request->search.'%')
               ->orwhere('Ebookeagency','LIKE','%'.$request->search.'%');
-            } 
+            }
            else{}}) //หน่วยงาน
         // ->whereNotIn('Edepartment_receive', [1,2,3,4,5,6,8,9,10,11,12,13,14])
         ->whereNotIn('Estatus', [2,3,4])
@@ -60,7 +60,7 @@ public function admituser(Request $request)
             elseif($request->get('search')){
               $q ->where('Ebook_receipt','LIKE','%'.$request->search.'%')
               ->orwhere('Ebookeagency','LIKE','%'.$request->search.'%');
-            } 
+            }
            else{}}) //หน่วยงาน
         // ->whereNotIn('Edepartment_receive', [1,2,3,4,5,6,8,9,10,11,12,13,14])
         ->whereNotIn('Estatus', [1,3,4])
@@ -78,7 +78,7 @@ public function admituser(Request $request)
             elseif($request->get('search')){
               $q ->where('Ebook_receipt','LIKE','%'.$request->search.'%')
               ->orwhere('Ebookeagency','LIKE','%'.$request->search.'%');
-            } 
+            }
            else{}})
         // ->whereNotIn('Edepartment_receive', [1,2,3,4,5,6,8,9,10,11,12,13,14])
         ->whereNotIn('Estatus', [1,2,4])
@@ -96,7 +96,7 @@ public function admituser(Request $request)
             elseif($request->get('search')){
               $q ->where('Ebook_receipt','LIKE','%'.$request->search.'%')
               ->orwhere('Ebookeagency','LIKE','%'.$request->search.'%');
-            } 
+            }
            else{}})
         // ->whereNotIn('Edepartment_receive', [1,2,3,4,5,6,8,9,10,11,12,13,14])
         ->whereNotIn('Estatus', [1,2,3])
@@ -107,7 +107,7 @@ public function admituser(Request $request)
     }
 public function statuswait(Request $request , $id)
   {
-    $role=Auth::user()->role; 
+    $role=Auth::user()->role;
         foreach(request()->input('chk', []) as $index => $chk) {
     $update = admit::find($index)->update([
         // 'item_id' => request()->input('item_id')[$index],
@@ -118,7 +118,7 @@ public function statuswait(Request $request , $id)
     return redirect()->back()->with('success',"อัพเดตภาพเรียบร้อย");
 
 
-       
+
  }
 public function pdfexport(Request $request)
  {
@@ -167,7 +167,7 @@ public function updatefile(Request $request,$id)
 
   $File = $request->file('File');
   if($File){
-    $role=Auth::user()->role; 
+    $role=Auth::user()->role;
     $input = $request->all();
     $destinationPath = 'files/file/';
     $Efile = date('YmdHis') . "." . $File->getClientOriginalExtension();
@@ -223,14 +223,14 @@ public function admitexport(Request $request)
                         $q ->where('Edate_out','>=',$request->searchdate.'%')
                         ->where('Edate_out','<=',$request->searchend.'%') ;
                     }
-                    })->whereNotIn('Estatus', [1,2,4])     
+                    })->whereNotIn('Estatus', [1,2,4])
                 ->orderby('id','DESC')->get();
                     }
 
                         return view('export.admit.export',compact('admit'));
                         // dd($request->searchdate);
-                    } 
-                    
+                    }
+
                     elseif ($request->has('exportPDF'))
                     {
                 // user
@@ -266,8 +266,8 @@ public function admitexport(Request $request)
                                 ]
                             ])
                         );
-                    return $pdf->download('รายงานหนังสือเข้า.pdf');  
-                    }  
+                    return $pdf->download('รายงานหนังสือเข้า.pdf');
+                    }
                 }
         // else ($request->isMethod('post'))
         else
@@ -295,7 +295,7 @@ public function admitexport(Request $request)
                   $q ->where('Edate_out','>=',$request->searchdate.'%')
                   ->where('Edate_out','<=',$request->searchend.'%') ;
               }
-              })->whereNotIn('Estatus', [1,2,4])     
+              })->whereNotIn('Estatus', [1,2,4])
           ->orderby('id','DESC')->get();
             }
         return view('export.admit.export',compact('admit'));
@@ -350,8 +350,8 @@ public function admitstaff(Request $request)
             elseif($request->get('search')){
               $q ->where('Ebook_receipt','LIKE','%'.$request->search.'%')
               ->orwhere('Ebookeagency','LIKE','%'.$request->search.'%');
-            } 
-           else{}})->whereNotIn('Estatus', [2,3,4])      
+            }
+           else{}})->whereNotIn('Estatus', [2,3,4])
         ->orderby('id','DESC')->paginate(15, ['*'], 'tb1');
         $tb1count = admit::Join('statuses', 'admits.Estatus', '=', 'statuses.Sid')
         ->select('admits.*')->where('Estatus','1')->count();
@@ -381,7 +381,7 @@ public function admitstaff(Request $request)
             elseif($request->get('search')){
               $q ->where('Ebook_receipt','LIKE','%'.$request->search.'%')
               ->orwhere('Ebookeagency','LIKE','%'.$request->search.'%');
-            }else{}})->whereNotIn('Estatus', [1,2,4])     
+            }else{}})->whereNotIn('Estatus', [1,2,4])
         ->orderby('id','DESC')->paginate(15, ['*'], 'tb3');
         $tb3count = admit::Join('statuses', 'admits.Estatus', '=', 'statuses.Sid')
         ->select('admits.*')->where('Estatus','3')->count();
@@ -396,7 +396,7 @@ public function admitstaff(Request $request)
             elseif($request->get('search')){
               $q ->where('Ebook_receipt','LIKE','%'.$request->search.'%')
               ->orwhere('Ebookeagency','LIKE','%'.$request->search.'%');
-            } else{}})->whereNotIn('Estatus', [1,2,3])    
+            } else{}})->whereNotIn('Estatus', [1,2,3])
         ->orderby('id','DESC')->paginate(15, ['*'], 'tb4');
         $tb4count = admit::Join('statuses', 'admits.Estatus', '=', 'statuses.Sid')
         ->select('admits.*')->where('Estatus','4')->count();
@@ -424,8 +424,8 @@ public function admitadmin(Request $request)
             elseif($request->get('search')){
               $q ->where('Ebook_receipt','LIKE','%'.$request->search.'%')
               ->orwhere('Ebookeagency','LIKE','%'.$request->search.'%');
-            } 
-           else{}})->whereNotIn('Estatus', [2,3,4])      
+            }
+           else{}})->whereNotIn('Estatus', [2,3,4])
         ->orderby('id','DESC')->paginate(15, ['*'], 'tb1');
         $tb1count = admit::Join('statuses', 'admits.Estatus', '=', 'statuses.Sid')
         ->select('admits.*')->where('Estatus','1')->count();
@@ -455,7 +455,7 @@ public function admitadmin(Request $request)
             elseif($request->get('search')){
               $q ->where('Ebook_receipt','LIKE','%'.$request->search.'%')
               ->orwhere('Ebookeagency','LIKE','%'.$request->search.'%');
-            }else{}})->whereNotIn('Estatus', [1,2,4])     
+            }else{}})->whereNotIn('Estatus', [1,2,4])
         ->orderby('id','DESC')->paginate(15, ['*'], 'tb3');
         $tb3count = admit::Join('statuses', 'admits.Estatus', '=', 'statuses.Sid')
         ->select('admits.*')->where('Estatus','3')->count();
@@ -470,7 +470,7 @@ public function admitadmin(Request $request)
             elseif($request->get('search')){
               $q ->where('Ebook_receipt','LIKE','%'.$request->search.'%')
               ->orwhere('Ebookeagency','LIKE','%'.$request->search.'%');
-            } else{}})->whereNotIn('Estatus', [1,2,3])    
+            } else{}})->whereNotIn('Estatus', [1,2,3])
         ->orderby('id','DESC')->paginate(15, ['*'], 'tb4');
         $tb4count = admit::Join('statuses', 'admits.Estatus', '=', 'statuses.Sid')
         ->select('admits.*')->where('Estatus','4')->count();
@@ -492,28 +492,28 @@ public function editpageadmit($id)
 // updateadmit post
 public function editadmit(Request $request , $id)
     {
-        $role=Auth::user()->role; 
+        $role=Auth::user()->role;
         $update = admit::find($id)->update([
             'Eagency_receive'=>$request->Eagency_receive,
             'Ebranch_receive'=>$request->Ebranch_receive,
             'Edepartment_receive'=>$request->Edepartment_receive,
             'Ename_receive'=>$request->Ename_receive,
             'Edate_receive'=>$request->Edate_receive,
-            'Edate_out'=>$request->Edate_out,       
-            'Esubject'=>$request->Esubject,                    
+            'Edate_out'=>$request->Edate_out,
+            'Esubject'=>$request->Esubject,
             'Ebookeagency'=>$request->Ebookeagency,
             'Ebook_receipt'=>$request->Ebook_receipt,
             'Estatus'=>1
             // ,'Ostatus'=>$request->Ostatus
         ]);
-        
+
         if($role=='0'){
             return redirect()->route('admituser')->with('success',"อัพเดตข้อมูลเรียบร้อย") ;
-    
+
             }
             elseif($role=='1'){
             return redirect()->route('admitstaff')->with('success',"อัพเดตข้อมูลเรียบร้อย") ;
-    
+
             }
             elseif($role=='2'){
             return redirect()->route('admitadmin')->with('success',"อัพเดตข้อมูลเรียบร้อย") ;
@@ -522,12 +522,12 @@ public function editadmit(Request $request , $id)
     }
 
 
-          
+
 //เริ่มหน้าaddbook
 public function getbranch(Request $request)
     {
-       
-  $cid=$request->post('cid'); 
+
+  $cid=$request->post('cid');
     //  if($cid=='1'){
     //     $branch= branch::where('agency',1)->get();
     //     $html='<option value="" >กรุณาเลือกสาขา</option>';
@@ -552,7 +552,7 @@ public function getbranch(Request $request)
     // }
 }
 
-    
+
 public function getdepartment(Request $request)
     {
      $sid=$request->post('sid');
@@ -586,9 +586,56 @@ public function addbook()
         return view('admit.addbook',compact('agency','story','admitagency','admitcount'));
     }
 
+    public function story(Request $request)
+    {
+        $story = admitstory::all();
+        return response()->json($story);
+       // return view('admit.addbook',compact('agency','story','admitagency','admitcount'));
+    }
+
+    public function savestory(Request $request)
+    {
+
+
+
+$amagency = new admitstory();
+$amagency-> amstory_name = $request->amstory_name;
+$amagency ->save();
+
+        return response()->json('success');
+     //   $story = admitstory::all();
+     //   return response()->json($story);
+       // return view('admit.addbook',compact('agency','story','admitagency','admitcount'));
+    }
+
+    public function saveadmitagency(Request $request)
+    {
+     \Log::info($request->all());
+
+$amagency = new admitagency();
+$amagency-> amagency_name = $request->amagency_name;
+$amagency ->save();
+
+        return response()->json('success');
+
+    }
+
+
+
+
+
+    public function admitagency(Request $request)
+    {
+        $admitagency = admitagency::all();
+        return response()->json($admitagency);
+       // return view('admit.addbook',compact('agency','story','admitagency','admitcount'));
+    }
+
 //บันทึกข้อมูลหนังสือ addbook post
 public function store(Request $request){
-        $role=Auth::user()->role; 
+
+
+        $role=Auth::user()->role;
         //บันทึกข้อมูล
         $data = array();
         $data["Ename"] = Auth::user()->name.' '.Auth::user()->Lastname;
@@ -607,15 +654,15 @@ public function store(Request $request){
         $data["Estatus"] = $request->Estatus;
 
         //query builderEbook_receipt
-        DB::table('admits')->insert($data);
+   DB::table('admits')->insert($data);
         // dd($data);
         if($role=='0'){
             return redirect()->route('admituser')->with('success',"อัพเดตข้อมูลเรียบร้อย") ;
-    
+
             }
             elseif($role=='1'){
             return redirect()->route('admitstaff')->with('success',"อัพเดตข้อมูลเรียบร้อย") ;
-    
+
             }
             elseif($role=='2'){
             return redirect()->route('admitadmin')->with('success',"อัพเดตข้อมูลเรียบร้อย") ;
@@ -638,5 +685,5 @@ public function addstory(Request $request)
     return redirect()->route('addbook');
  }
 
-  
+
 }
